@@ -4,6 +4,10 @@
     padding: 0;
 }
 
+.d-flex {
+    display: block;
+}
+
 body {
     background-color: antiquewhite;
 
@@ -52,9 +56,10 @@ body {
             z-index: 10;
             position: absolute;
             top: 0;
-            display: flex;
+            display: none;
             justify-content: center;
             font-size: 2rem;
         }
+
     }
 }

@@ -54,6 +54,7 @@ function start() {
             box.insertAdjacentHTML("beforeend", skull);
             box.removeEventListener("click", clickBox)
             cover.classList.add("cover")
+            cover.style.display = "flex"
         } else {
             if (!box.classList.contains("green")) {
                 box.insertAdjacentHTML("beforeend", flower)
