@@ -6,7 +6,11 @@ const markup = `<div class="box"></div>`;
 
 const skull = `<i class="fa-solid fa-skull"></i>`;
 
-const flower = `<i class="fa-solid fa-flower"></i>`;
+const flower = `<i class="fa-solid fa-seedling"></i>`;
+
+let skullArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+let cover = document.getElementById("cover")
 
 
 function start() {
@@ -44,8 +48,20 @@ function start() {
 
     function clickBox(box, index) {
         console.log("hello world")
-        box.style.backgroundColor = "red";
-        box.textContent = result[index];
+
+        if (skullArray.includes(result[index])) {
+            box.classList.add("red")
+            box.insertAdjacentHTML("beforeend", skull);
+            box.removeEventListener("click", clickBox)
+            cover.classList.add("cover")
+        } else {
+            if (!box.classList.contains("green")) {
+                box.insertAdjacentHTML("beforeend", flower)
+                box.classList.add("green")
+            }
+
+        }
+
         console.log(box)
     }
 }
