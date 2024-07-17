@@ -36,9 +36,18 @@ function start() {
     let result = randomUniqueNum(100, 100);
 
     // Assegna i numeri ai box
+
     boxes.forEach((box, index) => {
+        box.addEventListener("click", () => clickBox(box));
+
         box.textContent = result[index];
     });
+
+    function clickBox(box) {
+        console.log("hello world")
+        box.style.backgroundColor = "red";
+        console.log(box)
+    }
 }
 
 start()
