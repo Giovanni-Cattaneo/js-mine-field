@@ -38,14 +38,14 @@ function start() {
     // Assegna i numeri ai box
 
     boxes.forEach((box, index) => {
-        box.addEventListener("click", () => clickBox(box));
+        box.addEventListener("click", () => clickBox(box, index));
 
-        box.textContent = result[index];
     });
 
-    function clickBox(box) {
+    function clickBox(box, index) {
         console.log("hello world")
         box.style.backgroundColor = "red";
+        box.textContent = result[index];
         console.log(box)
     }
 }
