@@ -12,8 +12,20 @@ let skullArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 let cover = document.getElementById("cover")
 
+let option = document.getElementById("option")
+
+const starting = document.getElementById("starting")
+
+
+
+starting.addEventListener("click", function () {
+    start()
+})
+
 
 function start() {
+
+
     for (let index = 0; index < 100; index++) {
         container.insertAdjacentHTML("beforeend", markup);
     }
@@ -65,6 +77,5 @@ function start() {
 
         console.log(box)
     }
-}
 
-start()
+}
