@@ -1,43 +1,44 @@
-console.log("hello world")
+console.log("hello world");
 
 let container = document.getElementById("container");
 
-const markup = `<div class="box"></div>`
+const markup = `<div class="box"></div>`;
 
-const skull = `<i class="fa-solid fa-skull></i>"`
+const skull = `<i class="fa-solid fa-skull"></i>`;
 
-const flower = `<i class="fa-solid fa-flower></i>`
-
-let boxes = document.getElementsByClassName("box")
+const flower = `<i class="fa-solid fa-flower"></i>`;
 
 
-for (let index = 0; index < 100; index++) {
-    const element = index;
-    container.insertAdjacentHTML("beforeend", markup)
-}
-
-boxes = Array.from(boxes)
-
-
-
-function randomUniqueNum(range, outputCount) {
-
-    let arr = []
-    for (let i = 1; i <= range; i++) {
-        arr.push(i)
+function start() {
+    for (let index = 0; index < 100; index++) {
+        container.insertAdjacentHTML("beforeend", markup);
     }
 
-    let result = [];
+    let boxes = Array.from(document.getElementsByClassName("box"));
 
-    for (let i = 1; i <= outputCount; i++) {
-        const random = Math.floor(Math.random() * (range - i));
-        result.push(arr[random]);
-        arr[random] = arr[range - i];
+    function randomUniqueNum(range, outputCount) {
+        let arr = [];
+        for (let i = 1; i <= range; i++) {
+            arr.push(i);
+        }
+
+        let result = [];
+        for (let i = 1; i <= outputCount; i++) {
+            const random = Math.floor(Math.random() * (range - i));
+            result.push(arr[random]);
+            arr[random] = arr[range - i];
+        }
+
+        console.log(result);
+        return result;
     }
 
-    console.log(result)
+    let result = randomUniqueNum(100, 100);
 
-    return result;
+    // Assegna i numeri ai box
+    boxes.forEach((box, index) => {
+        box.textContent = result[index];
+    });
 }
 
-randomUniqueNum(100, 100)
+start()
