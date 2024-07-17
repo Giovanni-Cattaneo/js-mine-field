@@ -16,6 +16,8 @@ let option = document.getElementById("option")
 
 const starting = document.getElementById("starting")
 
+let begin = true
+
 
 
 starting.addEventListener("click", function () {
@@ -24,58 +26,61 @@ starting.addEventListener("click", function () {
 
 
 function start() {
-
-
-    for (let index = 0; index < 100; index++) {
-        container.insertAdjacentHTML("beforeend", markup);
-    }
-
-    let boxes = Array.from(document.getElementsByClassName("box"));
-
-    function randomUniqueNum(range, outputCount) {
-        let arr = [];
-        for (let i = 1; i <= range; i++) {
-            arr.push(i);
+    if (begin) {
+        starting.disabled = true
+        for (let index = 0; index < 100; index++) {
+            container.insertAdjacentHTML("beforeend", markup);
         }
 
-        let result = [];
-        for (let i = 1; i <= outputCount; i++) {
-            const random = Math.floor(Math.random() * (range - i));
-            result.push(arr[random]);
-            arr[random] = arr[range - i];
-        }
+        let boxes = Array.from(document.getElementsByClassName("box"));
 
-        console.log(result);
-        return result;
-    }
-
-    let result = randomUniqueNum(100, 100);
-
-    // Assegna i numeri ai box
-
-    boxes.forEach((box, index) => {
-        box.addEventListener("click", () => clickBox(box, index));
-
-    });
-
-    function clickBox(box, index) {
-        console.log("hello world")
-
-        if (skullArray.includes(result[index])) {
-            box.classList.add("red")
-            box.insertAdjacentHTML("beforeend", skull);
-            box.removeEventListener("click", clickBox)
-            cover.classList.add("cover")
-            cover.style.display = "flex"
-        } else {
-            if (!box.classList.contains("green")) {
-                box.insertAdjacentHTML("beforeend", flower)
-                box.classList.add("green")
+        function randomUniqueNum(range, outputCount) {
+            let arr = [];
+            for (let i = 1; i <= range; i++) {
+                arr.push(i);
             }
 
+            let result = [];
+            for (let i = 1; i <= outputCount; i++) {
+                const random = Math.floor(Math.random() * (range - i));
+                result.push(arr[random]);
+                arr[random] = arr[range - i];
+            }
+
+            console.log(result);
+            return result;
         }
 
-        console.log(box)
+        let result = randomUniqueNum(100, 100);
+
+        // Assegna i numeri ai box
+
+        boxes.forEach((box, index) => {
+            box.addEventListener("click", () => clickBox(box, index));
+
+        });
+
+        function clickBox(box, index) {
+            console.log("hello world")
+
+            if (skullArray.includes(result[index])) {
+                box.classList.add("red")
+                box.insertAdjacentHTML("beforeend", skull);
+                box.removeEventListener("click", clickBox)
+                cover.classList.add("cover")
+                cover.style.display = "flex"
+            } else {
+                if (!box.classList.contains("green")) {
+                    box.insertAdjacentHTML("beforeend", flower)
+                    box.classList.add("green")
+                }
+
+            }
+
+            console.log(box)
+        }
     }
+
+
 
 }
