@@ -8,12 +8,28 @@
     display: block;
 }
 
+button {
+    font-size: 1.1rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.3rem;
+}
+
 body {
     background-color: antiquewhite;
 
     & header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.3rem;
+        margin-bottom: 0.5rem;
 
         & h1 {
+            text-align: center;
+        }
+
+        #option {
             text-align: center;
         }
     }
@@ -86,12 +102,6 @@ body {
 
             & h2 {
                 color: black;
-            }
-
-            & button {
-                font-size: 1.3rem;
-                padding: 0.2rem 0.5rem;
-                border-radius: 0.3rem;
             }
         }
 
