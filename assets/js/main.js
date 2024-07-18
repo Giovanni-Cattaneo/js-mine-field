@@ -35,8 +35,6 @@ function start() {
 
         let result = randomUniqueNum(100, 100);
 
-        // Assegna i numeri ai box
-
         boxes.forEach((box, index) => {
             box.addEventListener("click", () => clickBox(box, index, result));
 
@@ -50,8 +48,6 @@ function start() {
         let boxes = Array.from(document.getElementsByClassName("box"));
 
         let result = randomUniqueNum(81, 81);
-
-        // Assegna i numeri ai box
 
         boxes.forEach((box, index) => {
             box.style.width = (100 / 9) + "%";
@@ -67,8 +63,6 @@ function start() {
         let boxes = Array.from(document.getElementsByClassName("box"));
 
         let result = randomUniqueNum(64, 64);
-
-        // Assegna i numeri ai box
 
         boxes.forEach((box, index) => {
             box.style.width = (100 / 8) + "%";
