@@ -1,5 +1,3 @@
-console.log("hello world");
-
 let container = document.getElementById("container");
 
 const markup = `<div class="box"></div>`;
@@ -8,41 +6,23 @@ const skull = `<i class="fa-solid fa-skull"></i>`;
 
 const flower = `<i class="fa-solid fa-seedling"></i>`;
 
-let skullArray = randomUniqueNum(64, 25)
-
-console.log(skullArray)
+let skullArray = randomUniqueNum(64, 20)
 
 let cover = document.getElementById("cover")
+
+let successCover = document.getElementById("success_cover")
 
 let option = document.getElementById("option")
 
 const starting = document.getElementById("starting")
 
-let begin = true
-
 success = 0
 
-const retry = document.getElementById("retry")
+const repeat = document.getElementById("retry")
 
-retry.addEventListener("click", function () {
-    let boxes = Array.from(document.getElementsByClassName("box"));
-    let succ = document.querySelector(".success")
-    console.log(succ)
-    succ.remove()
-    boxes.forEach(box => box.remove());
-    cover.classList.remove("cover")
-    cover.style.display = "none"
-    start()
-})
+repeat.addEventListener("click", () => retry())
 
-starting.addEventListener("click", function () {
-    let boxes = Array.from(document.getElementsByClassName("box"));
-    boxes.forEach(box => box.remove());
-    cover.classList.remove("cover")
-    cover.style.display = "none"
-    start()
-})
-
+starting.addEventListener("click", () => retry())
 
 function start() {
 
@@ -101,16 +81,35 @@ function start() {
 
 }
 
-function clickBox(box, index, result) {
-    console.log("hello world")
 
+
+// utility function area
+
+function retry() {
+    let boxes = Array.from(document.getElementsByClassName("box"));
+    let succ = document.querySelector(".success")
+    if (succ) {
+        succ.remove()
+    }
+    boxes.forEach(box => box.remove());
+    cover.classList.remove("cover")
+    cover.style.display = "none"
+    start()
+}
+
+function clickBox(box, index, result) {
     if (skullArray.includes(result[index])) {
         box.classList.add("red")
         box.insertAdjacentHTML("beforeend", skull);
-        box.removeEventListener("click", clickBox)
         cover.classList.add("cover")
         cover.style.display = "flex"
-        cover.insertAdjacentHTML("beforeend", `<p class="success">Hai trovato ${success} fiori</p>`)
+        if (success === 1) {
+            cover.insertAdjacentHTML("beforeend", `<p class="success">Hai trovato ${success} fiore</p>`)
+        } else if (success > 1) {
+            cover.insertAdjacentHTML("beforeend", `<p class="success">Hai trovato ${success} fiori</p>`)
+        } else {
+            cover.insertAdjacentHTML("beforeend", `<p class="success">Nemmeno un fiore trovato, che sfortuna</p>`)
+        }
         if (success > 0) {
             success = 0
         }
@@ -121,11 +120,12 @@ function clickBox(box, index, result) {
             box.insertAdjacentHTML("beforeend", flower)
             box.classList.add("green")
         }
+        if (success === (result.length - skullArray.length)) {
+            successCover.classList.add("cover")
+            successCover.style.display = "flex"
+        }
 
     }
-
-    console.log(box)
-
 }
 
 function randomUniqueNum(range, outputCount) {
