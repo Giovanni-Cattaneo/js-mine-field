@@ -20,10 +20,15 @@ const starting = document.getElementById("starting")
 
 let begin = true
 
+success = 0
+
 const retry = document.getElementById("retry")
 
 retry.addEventListener("click", function () {
     let boxes = Array.from(document.getElementsByClassName("box"));
+    let succ = document.querySelector(".success")
+    console.log(succ)
+    succ.remove()
     boxes.forEach(box => box.remove());
     cover.classList.remove("cover")
     cover.style.display = "none"
@@ -53,30 +58,10 @@ function start() {
         // Assegna i numeri ai box
 
         boxes.forEach((box, index) => {
-            box.addEventListener("click", () => clickBox(box, index));
+            box.addEventListener("click", () => clickBox(box, index, result));
 
         });
 
-        function clickBox(box, index) {
-            console.log("hello world")
-
-            if (skullArray.includes(result[index])) {
-                box.classList.add("red")
-                box.insertAdjacentHTML("beforeend", skull);
-                box.removeEventListener("click", clickBox)
-                cover.classList.add("cover")
-                cover.style.display = "flex"
-            } else {
-                if (!box.classList.contains("green")) {
-                    box.insertAdjacentHTML("beforeend", flower)
-                    box.classList.add("green")
-                }
-
-            }
-
-            console.log(box)
-
-        }
     } else if (option.value === "hard") {
         for (let index = 0; index < 81; index++) {
             container.insertAdjacentHTML("beforeend", markup);
@@ -90,30 +75,10 @@ function start() {
 
         boxes.forEach((box, index) => {
             box.style.width = (100 / 9) + "%";
-            box.addEventListener("click", () => clickBox(box, index));
+            box.addEventListener("click", () => clickBox(box, index, result));
 
         });
 
-        function clickBox(box, index) {
-            console.log("hello world")
-
-            if (skullArray.includes(result[index])) {
-                box.classList.add("red")
-                box.insertAdjacentHTML("beforeend", skull);
-                box.removeEventListener("click", clickBox)
-                cover.classList.add("cover")
-                cover.style.display = "flex"
-            } else {
-                if (!box.classList.contains("green")) {
-                    box.insertAdjacentHTML("beforeend", flower)
-                    box.classList.add("green")
-                }
-
-            }
-
-            console.log(box)
-            return boxes
-        }
     } else {
         for (let index = 0; index < 64; index++) {
             container.insertAdjacentHTML("beforeend", markup);
@@ -127,32 +92,39 @@ function start() {
 
         boxes.forEach((box, index) => {
             box.style.width = (100 / 8) + "%";
-            box.addEventListener("click", () => clickBox(box, index));
+            box.addEventListener("click", () => clickBox(box, index, result));
 
         });
 
-        function clickBox(box, index) {
-            console.log("hello world")
-
-            if (skullArray.includes(result[index])) {
-                box.classList.add("red")
-                box.insertAdjacentHTML("beforeend", skull);
-                box.removeEventListener("click", clickBox)
-                cover.classList.add("cover")
-                cover.style.display = "flex"
-            } else {
-                if (!box.classList.contains("green")) {
-                    box.insertAdjacentHTML("beforeend", flower)
-                    box.classList.add("green")
-                }
-
-            }
-
-            console.log(box)
-
-        }
     }
 
+
+}
+
+function clickBox(box, index, result) {
+    console.log("hello world")
+
+    if (skullArray.includes(result[index])) {
+        box.classList.add("red")
+        box.insertAdjacentHTML("beforeend", skull);
+        box.removeEventListener("click", clickBox)
+        cover.classList.add("cover")
+        cover.style.display = "flex"
+        cover.insertAdjacentHTML("beforeend", `<p class="success">Hai trovato ${success} fiori</p>`)
+        if (success > 0) {
+            success = 0
+        }
+    } else {
+        if (!box.classList.contains("green")) {
+            success++
+            console.log(success)
+            box.insertAdjacentHTML("beforeend", flower)
+            box.classList.add("green")
+        }
+
+    }
+
+    console.log(box)
 
 }
 
